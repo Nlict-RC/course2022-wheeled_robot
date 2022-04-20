@@ -67,8 +67,8 @@ class GlobalPlanner:
         res = True
         return PlanResponse(res)
     def initPlanner(self):
-        map_data = np.array(self.map.data).reshape((-1,self.map.info.height)).transpose()
-        ox,oy = np.nonzero(map_data > 50)
+        map_data = np.array(self.map.data).reshape((self.map.info.height,-1)).transpose()
+        ox,oy = np.nonzero(map_data != 0)
         self.plan_ox = (ox*self.map.info.resolution+self.map.info.origin.position.x).tolist()
         self.plan_oy = (oy*self.map.info.resolution+self.map.info.origin.position.y).tolist()
         ## TODO init your planner
